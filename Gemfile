@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #ブートストラップを使用する
 gem 'bootstrap-sass'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# has_secure_passwordを使用する
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
