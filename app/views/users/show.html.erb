@@ -1,4 +1,24 @@
-<h1>
-    <%= gravatar_for @user %>
-    <%= @user.name %>
-</h1>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        
+        <h1>
+            <%= gravatar_for @user %>
+            <%= @user.name %>
+        </h1>
+        
+        <div class="well well-lg">
+            <p>
+                <span class="text-primary">ニックネーム</span><br>
+                <%= @user.nickname %>
+            </p>
+            <p>
+                <span class="text-primary">生年月日</span><br>
+                <%= @user.birthday %>
+            </p>
+        </div>
+        <p>
+            (<%= link_to "edit" , edit_user_path %>)
+        </p>
+
+    </div>
+</div>
