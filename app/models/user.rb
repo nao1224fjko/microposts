@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
     validates :nickname, length: { maximum: 30 }
 
     #birthdayは必須ではない
-    validates :birthday, length: { maximum: 8 }
+    validates :birthday, length: { maximum: 10 }
     
 end
