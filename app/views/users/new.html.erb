@@ -7,16 +7,29 @@
             <%= render 'shared/error_messages', object: f.object %><!-- エラーメッセージ表示 -->
             
             <%= f.label :name %>
+            <span class="text-danger">*</span>
             <%= f.text_field :name, class: 'form-control' %>
             
             <%= f.label :email %>
+            <span class="text-danger">*</span>
             <%= f.text_field :email, class: 'form-control' %>
             
             <%= f.label :password %>
+            <span class="text-danger">*</span>
             <%= f.password_field :password, class: 'form-control' %>
             
             <%= f.label :password_confirmation, "Confirmation" %>
+            <span class="text-danger">*</span>
             <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+
+            <br>
+            <%= f.label :nickname %>
+            <%= f.text_field :nickname, class: 'form-control' %>
+            
+            <%= f.label :birthday %>
+            <%= f.date_field :birthday, class: 'form-control' %>
+            
             <%= f.submit "Create my accout", class: "btn btn-large btn-primary" %>
             
         <% end %>
