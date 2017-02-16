@@ -1,24 +1,33 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        
-        <h1>
+    
+    <aside class="col-md-4">
+        <section class="user_info">
             <%= gravatar_for @user %>
-            <%= @user.name %>
-        </h1>
-        
-        <div class="well well-lg">
+            <h1>
+                <%= @user.name %>
+            </h1>
             <p>
-                <span class="text-primary">ニックネーム</span><br>
-                <%= @user.nickname %>
+                <span class="text-primary">ニックネーム：<%= @user.nickname %></span>
             </p>
             <p>
-                <span class="text-primary">生年月日</span><br>
-                <%= @user.birthday %>
+                <span class="text-primary">生年月日：<%= @user.birthday %></span>
             </p>
-        </div>
-        <p>
+            <p>
             (<%= link_to "edit" , edit_user_path %>)
-        </p>
-
+            </p>
+        </section>
+    </aside>
+    
+    <div class="col-md-8">
+        <!-- ユーザーがマイクロポスト投稿してある場合
+        投稿数を表示し -->
+        <% if @user.microposts.any? %>
+        <h3>Microposts (<%= @user.microposts.count %>)</h3>
+        <ol class="microposts">
+            <!-- パーシャルファイルを表示 -->
+            <%= render @microposts %>
+        </ol>
+        <% end %>
     </div>
+    
 </div>

@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   
   def show # ユーザーページ
    @user = User.find(params[:id])
+   # マイクロポストを作成日時の新しいものから順に@micropostsに代入する
+   @microposts = @user.microposts.order(created_at: :desc)
   end
 
   
@@ -36,7 +38,6 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
 
 
   private

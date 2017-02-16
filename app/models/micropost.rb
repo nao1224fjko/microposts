@@ -7,7 +7,4 @@ class Micropost < ActiveRecord::Base
   #コンテンツが存在し、文字数は140までのバリデーション
   validates :content, presence: true, length: { maximum: 140 }
   
-  #ユーザーは複数の投稿（マイクロポスト）を持つことができる
-  has_many :microposts
-
 end
