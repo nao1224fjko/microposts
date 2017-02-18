@@ -1,33 +1,29 @@
-<h1>Profile</h1>
-
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-          <% if @user.errors.present? %>
-            <div class="alert alert-danger">
-              <%= alert %>
-              <ul>
-                <% @user.errors.full_messages.each do |full_message| %>
-                  <li>
-                    <%= full_message %>
-                  </li>
-                <% end %> 
-              </ul>
+            <%= gravatar_for @user %>
+            <h1>
+                <%= @user.name %>
+            </h1>
+            <p>
+                <span class="text-primary">ニックネーム：<%= @user.nickname %></span>
+            </p>
+            <p>
+                <span class="text-primary">生年月日：<%= @user.birthday %></span>
+            </p>
+            <p>
+            (<%= link_to "edit" , edit_user_path %>)
+            </p>
+            
+            <% @user ||= current_user %>
+            <div class="stats">
+              <a href="<%= followings_user_path(@user) %>">
+                <strong id="followings" class="stat">
+                  <%= @user.following_users.count %>
+                </strong>
+                following
+              </a>
+              <a href="<%= followers_user_path(@user) %>">
+                <strong id="followers" class="stat">
+                  <%= @user.follower_users.count %>
+                </strong>
+                followers
+              </a>
             </div>
-          <% end %>
-  
-  
-        
-        <%= form_for(@user) do |f| %>
-        
-            <%= f.label :nickname %>
-            <%= f.text_field :nickname, class: 'form-control' %>
-            
-            <%= f.label :birthday %>
-            <%= f.date_field :birthday, class: 'form-control' %>
-            
-            <%= f.submit "Submit", class: "btn btn-primary" %>
-        
-        <% end %>
-        
-    </div>
-</div>
