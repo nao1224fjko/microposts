@@ -12,6 +12,18 @@ Rails.application.routes.draw do
   #操作や表示を行えるようにリソースメソッドを行う
   resources :microposts
   
+  #操作や表示を行えるようにリソースメソッドを行う
+  #作成と削除のみ可能。アップデートやエディットは使わない
+  resources :relationships, only: [:create, :destroy]
+  
+  #followings,followers一覧のために新アクション追加
+  resources :users do
+    member do
+      get 'followings'
+      get 'followers'
+    end
+  end
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

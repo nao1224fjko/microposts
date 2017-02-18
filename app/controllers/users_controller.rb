@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :show, :followings, :followers]
   before_action :check_user, only: [:edit, :update]
   
   def show # ユーザーページ
-   @user = User.find(params[:id])
+    # before_action :set_userでユーザーをセットしているので下記一文は省ける
+    # @user  = User.find(params[:id])
    # マイクロポストを作成日時の新しいものから順に@micropostsに代入する
    @microposts = @user.microposts.order(created_at: :desc)
   end
-
+  
   
   def new
     @user = User.new
@@ -25,10 +26,14 @@ class UsersController < ApplicationController
   end
   
   def edit
+    # before_action :set_userでユーザーをセットしているので下記一文は省ける
+    # @user  = User.find(params[:id])
   end
   
-  
+
   def update
+    # before_action :set_userでユーザーをセットしているので下記一文は省ける
+    # @user  = User.find(params[:id])
     if @user.update(user_params)
       #プロフィールの保存に成功した場合
       flash[:success] = "プロフィールを編集しました"#フラッシュメッセージ
@@ -38,6 +43,24 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  #フォロー中一覧
+  def followings
+    # before_action :set_userでユーザーをセットしているので下記一文は省ける
+    # @user  = User.find(params[:id])
+    @users = @user.following_users
+  end
+  
+  #フォロワー一覧
+  def followers
+    # before_action :set_userでユーザーをセットしているので下記一文は省ける
+    # @user  = User.find(params[:id])
+    @users = @user.follower_users
+  end
+
+
+
+
 
 
   private
@@ -59,6 +82,5 @@ class UsersController < ApplicationController
       redirect_to root_url #トップページにリダイレクト
     end
   end
-
-
+  
 end

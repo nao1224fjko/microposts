@@ -2,29 +2,20 @@
     
     <aside class="col-md-4">
         <section class="user_info">
-            <%= gravatar_for @user %>
-            <h1>
-                <%= @user.name %>
-            </h1>
-            <p>
-                <span class="text-primary">ニックネーム：<%= @user.nickname %></span>
-            </p>
-            <p>
-                <span class="text-primary">生年月日：<%= @user.birthday %></span>
-            </p>
-            <p>
-            (<%= link_to "edit" , edit_user_path %>)
-            </p>
+            <%= render 'profile' %>
         </section>
     </aside>
     
     <div class="col-md-8">
+        <!-- フォローフォームを表示 -->
+        <%= render 'follow_form' if logged_in? %>
+        
         <!-- ユーザーがマイクロポスト投稿してある場合
-        投稿数を表示し -->
+        投稿数を表示 -->
         <% if @user.microposts.any? %>
         <h3>Microposts (<%= @user.microposts.count %>)</h3>
         <ol class="microposts">
-            <!-- パーシャルファイルを表示 -->
+            <!-- 投稿を表示 -->
             <%= render @microposts %>
         </ol>
         <% end %>
