@@ -5,7 +5,6 @@ class CreateMicroposts < ActiveRecord::Migration
       t.text :content
 
       t.timestamps null: false
-      #ユーザーと投稿の関連付け
       t.index [:user_id, :created_at]
     end
   end

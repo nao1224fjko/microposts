@@ -28,6 +28,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 # has_secure_passwordを使用する
 gem 'bcrypt', '~> 3.1.7'
+#ページングのためのkaminariを使用する
+gem 'kaminari'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
