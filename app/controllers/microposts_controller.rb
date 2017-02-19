@@ -22,6 +22,7 @@ class MicropostsController < ApplicationController
         flash[:success] = "Micropost deleted"
         redirect_to request.referrer || root_url
       end
+
     
     private
     #ストロングパラメータで受け取るデータを制限。不要なデータは受け取らない

@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
     validates :birthday, length: { maximum: 10 }
     
     
-    
     #ユーザーは複数の投稿（マイクロポスト）を持つことができる
     has_many :microposts
     
