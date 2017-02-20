@@ -10,7 +10,8 @@ class MicropostsController < ApplicationController
         else
           #エラーが発生した場合はstatic_pages/homeテンプレートを使用する
           @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
-          
+          #エラーが発生した場合もページング機能を使用する
+          @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
           render 'static_pages/home'
         end
       end
