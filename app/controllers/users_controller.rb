@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     # @user  = User.find(params[:id])
    # マイクロポストを作成日時の新しいものから順に@micropostsに代入する
    @microposts = @user.microposts.order(created_at: :desc)
+   # ページングkaminariの代入 
+   @microposts = current_user.microposts.order(created_at: :desc).page(params[:page]).per(10)
   end
   
   
