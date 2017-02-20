@@ -4,11 +4,10 @@ class UsersController < ApplicationController
   
   def show # ユーザーページ
     # before_action :set_userでユーザーをセットしているので下記一文は省ける
-    # @user  = User.find(params[:id])
+    @user  = User.find(params[:id])
    # マイクロポストを作成日時の新しいものから順に@micropostsに代入する
-   @microposts = @user.microposts.order(created_at: :desc)
-   # ページングkaminariの代入 
-   @microposts = current_user.microposts.order(created_at: :desc).page(params[:page]).per(10)
+   # そしてページングkaminariの代入 
+   @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
   end
   
   
