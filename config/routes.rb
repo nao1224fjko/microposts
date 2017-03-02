@@ -8,15 +8,20 @@ Rails.application.routes.draw do
   delete 'logout', to:'sessions#destroy'
   
   #操作や表示を行えるようにリソースメソッドを行う
-  resources :users
-  #操作や表示を行えるようにリソースメソッドを行う
-  resources :microposts
+  #resources :users
+  #マイクロポストを使えるようにリソースメソッドを行う
+  #ポストHTTPメソッドとリツイートアクションを追加
+  resources :microposts do
+    member do
+      post 'retweet'
+    end
+  end
   
   #操作や表示を行えるようにリソースメソッドを行う
   #作成と削除のみ可能。アップデートやエディットは使わない
   resources :relationships, only: [:create, :destroy]
   
-  #followings,followers一覧のために新アクション追加
+  #操作や表示、followings,followers一覧のために新アクション追加
   resources :users do
     member do
       get 'followings'

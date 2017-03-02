@@ -2,6 +2,11 @@ class MicropostsController < ApplicationController
     #ログインしたユーザーのみ投稿をクリエイト・デストロイできる
     before_action :logged_in_user, only: [:create, :destroy]
     
+    
+    def index
+      @microposts = Micropost.includes(:user).order(created_at: :desc).limit(100).page(params[:page]).per(10)
+    end
+    
       def create
         @micropost = current_user.microposts.build(micropost_params)
         if @micropost.save
@@ -9,12 +14,23 @@ class MicropostsController < ApplicationController
           redirect_to root_url
         else
           #エラーが発生した場合はstatic_pages/homeテンプレートを使用する
-          @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
+          #@feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
           #エラーが発生した場合もページング機能を使用する
           @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
           render 'static_pages/home'
         end
       end
+
+
+      def retweet
+        original = Micropost.find(params[:id])
+        @micropost = current_user.microposts.build(original_id: original.id)
+        @micropost.content = original.content
+        @micropost.save
+        flash[:success] = "Retweet created"
+        redirect_to request.referrer || root_url
+      end
+      
       
       
       def destroy

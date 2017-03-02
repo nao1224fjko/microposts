@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Welcome to the Sample App!"#フラッシュメッセージ
       redirect_to @user #新規登録後ユーザーページにリダイレクト
     else

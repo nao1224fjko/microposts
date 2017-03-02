@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
     #ユーザーは複数の投稿（マイクロポスト）を持つことができる
     has_many :microposts
     
+    #ユーザーは複数のリツイートを持つことができる
+    has_many :retweets
+
+    #ユーザーは複数のリツイート（original_id）を持つことができる
+    has_many :original_id
+    
     
     #フォローしているユーザー
     has_many :following_relationships, class_name: "Relationship",
