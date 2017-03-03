@@ -27,7 +27,7 @@ class MicropostsController < ApplicationController
         @micropost = current_user.microposts.build(original_id: original.id)
         @micropost.content = original.content
         @micropost.save
-        flash[:success] = "Retweet created"
+        flash[:success] = "リツイートしました"
         redirect_to request.referrer || root_url
       end
       

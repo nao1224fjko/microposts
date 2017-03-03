@@ -7,4 +7,14 @@ class Micropost < ActiveRecord::Base
   #コンテンツが存在し、文字数は140までのバリデーション
   validates :content, presence: true, length: { maximum: 140 }
   
+  # お気に入りは複数持てて削除可能
+  # お気に入りのあるユーザーをfavoriteを経由して取得する
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :user
+  
+  # このユーザにお気に入りが含まれていないかチェック
+  def favorite?(user)
+    favorites.include?(user)
+  end
+    
 end

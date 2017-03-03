@@ -70,4 +70,29 @@ class User < ActiveRecord::Base
     def feed_items
         Micropost.where(user_id: following_user_ids + [self.id])
     end
+    
+    
+    
+    #ユーザーは複数のお気に入りを持つことができる
+    #お気に入りの一覧を取得することができる
+    has_many :favorites, dependent: :destroy
+    has_many :favorite_microposts, through: :favorites, source: :micropost
+    
+    
+    
+    # お気に入りに追加する
+    # 現在のユーザーのfavoriteの中からお気に入りに追加するべくクリックしたmicropost_idを検索し、なかった場合新しくお気に入りを作成します。
+    def favorite(micropost)
+        favorites.find_or_create_by(micropost_id: micropost.id)
+    end
+
+    
+    # お気に入りを削除する
+    # favoriteの中から消したいmicropost_idを探し、存在する場合は削除します。
+    def unfavorite(micropost)
+        favorite = favorites.find_by(micropost_id: micropost.id)
+        favorite.destroy if favorite
+    end
+    
+    
 end

@@ -17,17 +17,23 @@ Rails.application.routes.draw do
     end
   end
   
-  #操作や表示を行えるようにリソースメソッドを行う
-  #作成と削除のみ可能。アップデートやエディットは使わない
+
+  #フォロー・フォロワー作成と削除のみ可能。アップデートやエディットは使わない
   resources :relationships, only: [:create, :destroy]
   
-  #操作や表示、followings,followers一覧のために新アクション追加
+  #操作や表示、followings,followers,お気に入り一覧のために新アクション追加
   resources :users do
     member do
-      get 'followings'
-      get 'followers'
+      get :followings, :followers, :favorites
     end
   end
+  
+  
+  #お気に入りの作成と削除のみ可能。アップデートやエディットは使わない
+  resources :microposts do
+    resource :favorites, only: [:create, :destroy]
+  end
+  
   
   
   # The priority is based upon order of creation: first created -> highest priority.

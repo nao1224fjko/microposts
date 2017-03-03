@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :followings, :followers]
+  before_action :set_user, only: [:edit, :update, :show, :followings, :followers, :favorites
+  ]
   before_action :check_user, only: [:edit, :update]
   
   def show # ユーザーページ
@@ -61,6 +62,12 @@ class UsersController < ApplicationController
   end
 
 
+  #お気に入り一覧
+  def favorites
+  # before_action :set_userでユーザーをセットしているので下記一文は省ける
+  # @user  = User.find(params[:id])
+    @microposts = @user.favorite_microposts
+  end
 
 
 
