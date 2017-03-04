@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
   
   get 'signup', to:'users#new'
+  get 'resign', to:'users#destroy'
   get 'login', to:'sessions#new'
   post 'login', to:'sessions#create'
   delete 'logout', to:'sessions#destroy'
@@ -15,8 +16,9 @@ Rails.application.routes.draw do
     member do
       post 'retweet'
     end
+  #お気に入りの作成と削除のみ可能。アップデートやエディットは使わない
+    resource :favorites, only: [:create, :destroy]
   end
-  
 
   #フォロー・フォロワー作成と削除のみ可能。アップデートやエディットは使わない
   resources :relationships, only: [:create, :destroy]
@@ -28,13 +30,10 @@ Rails.application.routes.draw do
     end
   end
   
-  
   #お気に入りの作成と削除のみ可能。アップデートやエディットは使わない
-  resources :microposts do
-    resource :favorites, only: [:create, :destroy]
-  end
-  
-  
+  # resources :microposts do
+  #   resource :favorites, only: [:create, :destroy]
+  # end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

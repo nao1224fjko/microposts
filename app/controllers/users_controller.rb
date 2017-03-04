@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :followings, :followers, :favorites
+  before_action :set_user, only: [:edit, :update, :show, :followings, :followers, :favorites, :destroy
   ]
   before_action :check_user, only: [:edit, :update]
   
@@ -14,6 +14,13 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+  end
+  
+
+  def destroy
+    @user.destroy
+    flash[:success] = "ユーザー登録を削除しました"
+    redirect_to request.referrer || root_url
   end
 
 
@@ -65,8 +72,9 @@ class UsersController < ApplicationController
   #お気に入り一覧
   def favorites
   # before_action :set_userでユーザーをセットしているので下記一文は省ける
-  # @user  = User.find(params[:id])
+  @user  = User.find(params[:id])
     @microposts = @user.favorite_microposts
+    render 'favorites'
   end
 
 

@@ -1,1 +1,2 @@
-<%= link_to "お気に入り", micropost_favorites_path(micropost), method: :post, data: { confirm: "本当にお気に入りに追加してもよいですか？" } %>
+<%= link_to "お気に入り", micropost_favorites_path(micropost),
+                                method: :post, remote: true %>

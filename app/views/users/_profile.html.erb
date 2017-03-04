@@ -1,33 +1,33 @@
-            <%= gravatar_for @user %>
+            <%= gravatar_for user %>
             <h1>
-                <%= @user.name %>
+                <%= user.name %>
             </h1>
             <p>
-                <span class="text-primary">ニックネーム：<%= @user.nickname %></span>
+                <span class="text-primary">ニックネーム：<%= user.nickname %></span>
             </p>
             <p>
-                <span class="text-primary">生年月日：<%= @user.birthday %></span>
+                <span class="text-primary">生年月日：<%= user.birthday %></span>
             </p>
             <p>
             (<%= link_to "edit" , edit_user_path %>)
             </p>
             
-            <% @user ||= current_user %>
+            <% user ||= current_user %>
             <div class="stats">
-              <a href="<%= followings_user_path(@user) %>">
+              <a href="<%= followings_user_path(user) %>">
                 <strong id="followings" class="stat">
-                  <%= @user.following_users.count %>
+                  <%= user.following_users.count %>
                 </strong>
                 following
               </a>
-              <a href="<%= followers_user_path(@user) %>">
+              <a href="<%= followers_user_path(user) %>">
                 <strong id="followers" class="stat">
-                  <%= @user.follower_users.count %>
+                  <%= user.follower_users.count %>
                 </strong>
                 followers
               </a>
               <br>
-              <a href="<%= favorites_user_path(@user) %>">
+              <a href="<%= favorites_user_path(user) %>">
                 お気に入り
               </a>
 
