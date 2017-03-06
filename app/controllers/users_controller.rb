@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :followings, :followers, :favorites, :destroy
   ]
-  before_action :check_user, only: [:edit, :update]
+  before_action :check_user, only: [:edit, :update, :destroy]
   
   def show # ユーザーページ
-    # before_action :set_userでユーザーをセットしているので下記一文は省ける
-    @user  = User.find(params[:id])
+  # before_action :set_userでユーザーをセットしているので下記一文は省ける
+  #@user  = User.find(params[:id])
    # マイクロポストを作成日時の新しいものから順に@micropostsに代入する
    # そしてページングkaminariの代入 
    @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:success] = "ユーザー登録を削除しました"
-    redirect_to request.referrer || root_url
+    redirect_to root_url #トップページにリダイレクト
   end
 
 

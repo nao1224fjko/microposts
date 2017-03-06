@@ -32,5 +32,14 @@
             <%= f.submit "Submit", class: "btn btn-primary" %>
         
         <% end %>
+        
+        <br>
+        <br>
+          <%= link_to "Micropostから退会", user_path(@user), method: :delete,
+                                       data: { confirm: "投稿したデータは全て消去されます。本当に退会してもよろしいですか？" }, class: "btn btn-primary" %>
+
+        <br>
+        <br>
     </div>
+
 </div>
