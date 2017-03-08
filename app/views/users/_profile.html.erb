@@ -8,27 +8,30 @@
             <p>
                 <span class="text-primary">生年月日：<%= user.birthday %></span>
             </p>
-            <p>
-            (<%= link_to "edit" , edit_user_path %>)
-            </p>
             
+            <% if current_user == user %>
+              <p>
+              (<%= link_to "edit" , edit_user_path %>)
+              </p>
+            <% end %>
+            
+            <!-- user_idがnillの場合current_userのidを入れてあげる -->
             <% user ||= current_user %>
-            <div class="stats">
-              <a href="<%= followings_user_path(user) %>">
-                <strong id="followings" class="stat">
-                  <%= user.following_users.count %>
-                </strong>
-                following
-              </a>
-              <a href="<%= followers_user_path(user) %>">
-                <strong id="followers" class="stat">
-                  <%= user.follower_users.count %>
-                </strong>
-                followers
-              </a>
-              <br>
-              <a href="<%= favorites_user_path(user) %>">
-                お気に入り
-              </a>
-
-            </div>
+              <div class="stats">
+                <a href="<%= followings_user_path(user) %>">
+                  <strong id="followings" class="stat">
+                    <%= user.following_users.count %>
+                  </strong>
+                  following
+                </a>
+                <a href="<%= followers_user_path(user) %>">
+                  <strong id="followers" class="stat">
+                    <%= user.follower_users.count %>
+                  </strong>
+                  followers
+                </a>
+                <br>
+                <a href="<%= favorites_user_path(user) %>">
+                  お気に入り
+                </a>
+              </div>

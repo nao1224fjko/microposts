@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 #ページングのためのkaminariを使用する
 gem 'kaminari'
 
+# デバッガ
+gem 'pry-byebug', group: :development
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

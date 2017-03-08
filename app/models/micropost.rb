@@ -13,8 +13,9 @@ class Micropost < ActiveRecord::Base
   has_many :favorite_users, through: :favorites, source: :user
   
   # このユーザにお気に入りが含まれていないかチェック
+  # favorite_usersは上部記載のhas_many: XXXの部分
   def favorite?(user)
-    favorites.include?(user)
+    favorite_users.include?(user)
   end
     
 end

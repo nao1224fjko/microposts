@@ -1,0 +1,26 @@
+
+    <%= form_for(@user) do |f| %>
+        <!-- エラーメッセージ表示 -->
+        <%= render 'shared/error_messages', object: f.object %>
+    
+        <%= f.label :name %>
+        <span class="text-danger">*</span>
+        <%= f.text_field :name, class: 'form-control' %>
+        
+        <%= f.label :email %>
+        <span class="text-danger">*</span>
+        <%= f.text_field :email, class: 'form-control' %>
+        
+        <%= f.label :password %>
+        <span class="text-danger">*</span>
+        <%= f.password_field :password, class: 'form-control' %>
+        
+        <%= f.label :password_confirmation, "Password confirmation" %>
+        <span class="text-danger">*</span>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+        <%= render 'form_extend', f: f %>
+        
+        <%= f.submit([comment], class: "btn btn-primary") %>
+        <!-- 変数comdmentは、edit.htmlとnew.htmlのrender内から呼び出されてボタンのラベルになる -->
+    <% end %>
