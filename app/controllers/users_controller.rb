@@ -3,12 +3,16 @@ class UsersController < ApplicationController
   ]
   before_action :check_user, only: [:edit, :update, :destroy]
   
+  
   def show # ユーザーページ
   # before_action :set_userでユーザーをセットしているので下記一文は省ける
   #@user  = User.find(params[:id])
    # マイクロポストを作成日時の新しいものから順に@micropostsに代入する
-   # そしてページングkaminariの代入 
-   @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
+   # そしてページングkaminariの代入
+   @title = "Microposts"
+   microposts = @user.microposts.order(created_at: :desc)
+   @count = microposts.count
+   @microposts = microposts.page(params[:page]).per(10)
   end
   
   
@@ -58,24 +62,36 @@ class UsersController < ApplicationController
   def followings
     # before_action :set_userでユーザーをセットしているので下記一文は省ける
     # @user  = User.find(params[:id])
-    @users = @user.following_users
+    @title = "フォロー中一覧"
+    users = @user.following_users
+    @count = users.count
+    @users = users.page(params[:page]).per(10)
+    render 'show_follow'
   end
   
   #フォロワー一覧
   def followers
     # before_action :set_userでユーザーをセットしているので下記一文は省ける
     # @user  = User.find(params[:id])
-    @users = @user.follower_users
+    @title = "フォロワー一覧"
+    users = @user.follower_users
+    @count = users.count
+    @users = users.page(params[:page]).per(10)
+    render 'show_follow'
   end
 
 
   #お気に入り一覧
   def favorites
   # before_action :set_userでユーザーをセットしているので下記一文は省ける
-  @user  = User.find(params[:id])
-    @microposts = @user.favorite_microposts
-    render 'favorites'
+    @title = "お気に入り一覧"
+    microposts = @user.favorite_microposts.order(created_at: :desc)
+    @count = microposts.count
+    @microposts = microposts.page(params[:page]).per(10)
+    render 'show'
   end
+
+
 
 
 

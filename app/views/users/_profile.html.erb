@@ -15,6 +15,9 @@
               </p>
             <% end %>
             
+            <!-- フォローフォームを表示 -->
+            <%= render 'follow_form' if logged_in? %>
+            
             <!-- user_idがnillの場合current_userのidを入れてあげる -->
             <% user ||= current_user %>
               <div class="stats">

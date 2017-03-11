@@ -8,16 +8,13 @@
     
     <div class="col-md-8">
 
-        <!-- ユーザーがマイクロポスト投稿してある場合
-        投稿数を表示 -->
-        <% if @user.microposts.any? %>
+
         <h3><%= @title %> (<%= @count %>)</h3>
-        <ol class="microposts">
+        <ol class="users">
             <!-- 投稿を表示 -->
-            <%= render @microposts %>
+            <%= render @users %>
         </ol>
-        <%= paginate @microposts %>
-        <% end %>
+        <%= paginate @users %>
         
     </div>
     
